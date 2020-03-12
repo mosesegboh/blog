@@ -18,7 +18,17 @@ class PagesController extends Controller {
 	}
 
 	public function getAbout(){
-		return view('pages.about');
+		$first = 'Egboh';
+		$last = 'moses';
+		$fullname = $first . " " . $last;
+		$email = 'mosesegboh@yahoo.com';
+		$data = [];
+		$data['email'] = $email;
+		$data['fullname'] = $fullname;
+
+		//the with function is what we use to access the variables in the view accesses it in the view the parameters is fullname which is set to $full whcih is the variable
+		//i changed it to another short cut below
+		return view('pages.about')->withData($data);
 	}
 
 	public function getContact(){
