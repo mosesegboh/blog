@@ -18,3 +18,6 @@ Route::get('contact','PagesController@getContact');
 Route::get('about', 'PagesController@getAbout' );
 
 Route::get('/', 'PagesController@getIndex');
+
+//we use the  resource below to merge all our routes in one line and we use namespacing aswell for our posts
+Route::resource('posts','PostController');

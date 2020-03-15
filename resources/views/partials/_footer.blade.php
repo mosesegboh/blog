@@ -1,4 +1,4 @@
     <hr>
-      <p class="text-center">copy right mozetty - All right reserved </p>
+      <p class="text-center">copyright mozetty - All right reserved </p>
 
    
