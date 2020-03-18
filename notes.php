@@ -15,4 +15,6 @@
 //this tutorial is for 5.1 and 5.2 some difference includes 1. middle ware in the routes file and carbon when updating composer and 3.importing laravel form helpers and the syntax for forms in form helpers
 //{!! is the opposite of echosing out the data !!}
 //{{ is not echoing out the data }}
+//if you get a parse error,it basically means its a php syntax error
+ //in the restful rable post.store creates a new role while posts.update overwrites an existing row
  ?>
