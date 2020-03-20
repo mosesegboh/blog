@@ -17,4 +17,7 @@
 //{{ is not echoing out the data }}
 //if you get a parse error,it basically means its a php syntax error
  //in the restful rable post.store creates a new role while posts.update overwrites an existing row
+ //this error means you will have to set a form method in your form MethodNotAllowedHttpException in RouteCollection.php line 218:
+//becasue laravel will automatically do a post request in a form when you submit but when you are updting you need to specify the one you need in the route list
+//if you are making a post and you see error which states that you cannot identify an object and something that has being working before,i think you need to check if that item actually exist
  ?>

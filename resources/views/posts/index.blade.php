@@ -36,8 +36,15 @@
 
 			  	@endforeach
 
+
 			  </tbody>
 			</table>
+
+			{{-- because we called the pagination function in the controllers we have access to a few pagination helpers --}}
+			<div class="text-center">
+				{!! $posts->render(); !!} 
+
+			 </div>
 		</div>
 	</div>
 

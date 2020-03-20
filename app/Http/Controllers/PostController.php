@@ -19,7 +19,8 @@ class PostController extends Controller
     public function index()
     {
         //create a variable and store all the blog posts in it from the database
-        $posts = Post::all();
+//from the below variable Post::all();,we changed all to the item below to paginate the page, we also added orderedBy function to get the most recent posts
+        $posts = Post::orderBy('id', 'desc') ->paginate(2);
 
         //return a view and pass in the above variable
         return view('posts.index')->withPosts($posts);
@@ -103,7 +104,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate the data
+        //the request parameter below contains all the data we need fron the database
+        $this->validate($request, array(
+             'title' => 'required|max:255',
+             'body'  => 'required'
+        ));
+
+        //save the data to the database
+        //find the post you want to edit first
+        $post = Post::find($id);
+        //input will grab parameters from either the post or get request and it will get whatever it being referenced as
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+
+        $post->save();
+
+
+        //set flash data with success message
+        Session::flash('success', 'This post was successfully saved' );
+
+        //redirect with flash data to posts.show
+        return redirect()->route('posts.show',$post->id);
     }
 
     /**
@@ -114,6 +136,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //find the item
+        $post = Post::find($id);
+        //call the delete function in out eloquent model
+        $post->delete();
+        //redirect
+        Session::Flash('success','the post was successfully deleted');
+        return redirect()->route('posts.index');
+
+
     }
 }
