@@ -20,4 +20,19 @@
  //this error means you will have to set a form method in your form MethodNotAllowedHttpException in RouteCollection.php line 218:
 //becasue laravel will automatically do a post request in a form when you submit but when you are updting you need to specify the one you need in the route list
 //if you are making a post and you see error which states that you cannot identify an object and something that has being working before,i think you need to check if that item actually exist
+ //carbon mainly has to do with date and time functions,like posted ...days ago or for addition and substracting time
+//FatalThrowableError in PagesController.php line 11:
+//Class 'App\Http\Controllers\Post' not foundthis error is caused because 
+//the above error is caused because we used the name spacing,we are using post in another controller which does not belong there,
+//so to solve this issue, we need to use/import above App/Post o whatever applies in the situation
+ //in the env. developmemt is developing locally and production is on the live server.so change that when deploying
+ //ERROR-ErrorException in 7177567e2e21e6fbe09b9c5081ac820b line 8:
+//Trying to get property of non-object (View: C:\wamp64\www\laravel\blog\resources\views\posts\show.blade.php)
+ //the above error means you are tyring to access somthing in the database that does not exist say id or something else
+ //processes for web development.1. discovery,design(wireframes and design mockups, code and development,Q and A testing),then deployment.
+ //try to index a column you will be searching a lot when dealing with your database,it speeds up the query response time and 
+ //when creating adding a slug column to the databse with data in it already in which the slug is already in it,you will run into an error because data is already in it.
+ //database seeding is basically adding data to a seed file so that when you run migration and all your data clears,you can prgrammatically repopulate the data after that
+ //its usually haradcoded inside the seed file so that when you run the seed file it can just repopulate the database.
+//you do php artisan db:seed but you will have to create the seed file first
  ?>

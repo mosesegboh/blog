@@ -4,10 +4,16 @@
 //controllers are php classes
 namespace App\Http\Controllers;
 
+use App\Post;
+
 class PagesController extends Controller {
 	//try to follow the convention of naming your function according to the type of http request it wants to make,such as post get ,put,delete
 	public function getIndex(){
-		return view('pages.welcome');
+		//to pull posts from our database
+		$posts = Post::orderBy('created_at','desc')->limit(4)->get();
+
+		//return the view with posts variable
+		return view('pages.welcome')->withPosts($posts);
 		//process for what we do in controllers include
 		//process variable data or params
 		//talk to the model

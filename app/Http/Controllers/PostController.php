@@ -19,8 +19,8 @@ class PostController extends Controller
     public function index()
     {
         //create a variable and store all the blog posts in it from the database
-//from the below variable Post::all();,we changed all to the item below to paginate the page, we also added orderedBy function to get the most recent posts
-        $posts = Post::orderBy('id', 'desc') ->paginate(2);
+//from the below variable Post::all();,we changed all to the item below to paginate the page, we also added orderedBy function to get the most recent postscs
+        $posts = Post::orderBy('id', 'desc') ->paginate(4);
 
         //return a view and pass in the above variable
         return view('posts.index')->withPosts($posts);
@@ -47,7 +47,8 @@ class PostController extends Controller
     {
         //validate the data
         $this->validate($request, array(
-                 'title' => 'required|max:255',
+                'title' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
                  'body'  => 'required'
             ));
 
@@ -55,6 +56,7 @@ class PostController extends Controller
         //eloquent is bascially working with databases without actually having to write code
         $post=new Post;
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->body = $request ->body;
 
         $post->save();
@@ -106,8 +108,9 @@ class PostController extends Controller
     {
         //validate the data
         //the request parameter below contains all the data we need fron the database
-        $this->validate($request, array(
+        $this->validate($request, ar ray(
              'title' => 'required|max:255',
+             'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
              'body'  => 'required'
         ));
 
@@ -116,6 +119,7 @@ class PostController extends Controller
         $post = Post::find($id);
         //input will grab parameters from either the post or get request and it will get whatever it being referenced as
         $post->title = $request->input('title');
+        $post->slug = $request->input('slug');
         $post->body = $request->input('body');
 
         $post->save();
