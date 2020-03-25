@@ -20,7 +20,7 @@ class PostController extends Controller
     {
         //create a variable and store all the blog posts in it from the database
 //from the below variable Post::all();,we changed all to the item below to paginate the page, we also added orderedBy function to get the most recent postscs
-        $posts = Post::orderBy('id', 'desc') ->paginate(4);
+        $posts = Post::orderBy('id', 'desc') ->paginate(5);
 
         //return a view and pass in the above variable
         return view('posts.index')->withPosts($posts);

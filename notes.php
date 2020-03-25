@@ -36,4 +36,9 @@
  //its usually haradcoded inside the seed file so that when you run the seed file it can just repopulate the database.
 //you do php artisan db:seed but you will have to create the seed file first
  //to make any change to your model...you can access the model class gangan for changes.
+ //the remember me feature basically saved a harshed value in your database column with a cookie saved in your browser to remember you
+ //a similar thing happpens with email verification and tokens
+ //salted is basically adding an additional random encryption to already hasrshed password becasue a harshed dpassword can be unharshed
+ //protected means you are actually overiding the functions of an external class
+ //if you are using the form manually use the csrf protection line otherwise your form will always fail
  ?>
