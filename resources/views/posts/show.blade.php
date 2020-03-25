@@ -12,7 +12,8 @@
  			<div class = "well">
  				<dl class="dl-horizontal">
  					<label>Url Slug:</label>
- 					<p> <a href="{{ url($post->slug) }}">{{ url($post->slug) }}</a></p>
+					 <!-- the below link is thesame thing as using the url link method in the welcome/index page -->
+ 					<p> <a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }}</a></p>
  				</dl>
 
  				<dl class="dl-horizontal">
@@ -44,10 +45,9 @@
  				 	<div class="col-md-12">
  				 		{!! Html::linkRoute('posts.index', '<<See All Posts', [], ['class' => 'btn btn-default btn-block btn-h1-spacing']) !!}
  				 	</div>
+
  				 </div>		
-
  			</div>
-
  		</div>
  	</div>
  	@endsection

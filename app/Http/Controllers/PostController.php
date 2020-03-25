@@ -49,7 +49,7 @@ class PostController extends Controller
         $this->validate($request, array(
                 'title' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                 'body'  => 'required'
+                'body'  => 'required'
             ));
 
         //store in the database
@@ -75,7 +75,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) 
     {
         //we want to find the post with the particular id we want to show in our database using the laravel method find()
         $post = Post::find($id);
@@ -108,11 +108,21 @@ class PostController extends Controller
     {
         //validate the data
         //the request parameter below contains all the data we need fron the database
-        $this->validate($request, ar ray(
-             'title' => 'required|max:255',
-             'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-             'body'  => 'required'
-        ));
+        //we used an if statement below to validate if the slug has being changed before because it causes a bug
+        $post = Post::find($id);
+
+        if ($request->input('slug') == $post->slug ) {
+            $this->validate($request, array(
+                'title' => 'required|max:255',
+                'body'  => 'required'
+           ));
+        }else{
+            $this->validate($request, array(
+                'title' => 'required|max:255',
+                'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'body'  => 'required'
+            ));
+        }
 
         //save the data to the database
         //find the post you want to edit first
@@ -147,7 +157,5 @@ class PostController extends Controller
         //redirect
         Session::Flash('success','the post was successfully deleted');
         return redirect()->route('posts.index');
-
-
     }
 }

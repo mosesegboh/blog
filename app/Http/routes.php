@@ -13,8 +13,11 @@
 
 //the base url and about
 //the @ sign tells it what part in the pages controller to go to which is pbviously the function we do same for post aswell
+//this particular version does not have a routes middleware but hte tutorial does
 Route::get('contact','PagesController@getContact');
-
+//the where at the end of the below routes means that no regular expressions shouldnbe allowed in the slugs so it should not accept anything outseide those characters 
+Route::get('blog/{slug}', ['as' => 'blog.single','uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
+Route::get('blog', ['uses' => 'BlogController@getIndex'], ['as' => 'blog.index']);
 Route::get('about', 'PagesController@getAbout' );
 
 Route::get('/', 'PagesController@getIndex');

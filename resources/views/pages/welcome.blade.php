@@ -23,7 +23,7 @@
               <h3>{{ $post->title }}</h3>
               <!-- we truncated the body below with the substr function -->
               <p>{{ substr($post->body, 0,300) }}{{ strlen($post->body) > 300 ? "..." : "" }}</p>
-              <a href="#" class="btn btn-primary">Read more</a>
+              <a href="{{ url('blog/'.$post->slug) }}" class="btn btn-primary">Read more</a>
            </div>        
            <hr>
 

@@ -35,4 +35,5 @@
  //database seeding is basically adding data to a seed file so that when you run migration and all your data clears,you can prgrammatically repopulate the data after that
  //its usually haradcoded inside the seed file so that when you run the seed file it can just repopulate the database.
 //you do php artisan db:seed but you will have to create the seed file first
+ //to make any change to your model...you can access the model class gangan for changes.
  ?>
