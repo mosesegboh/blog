@@ -41,4 +41,11 @@
  //salted is basically adding an additional random encryption to already hasrshed password becasue a harshed dpassword can be unharshed
  //protected means you are actually overiding the functions of an external class
  //if you are using the form manually use the csrf protection line otherwise your form will always fail
+ //the Auth::Check is a basic laravel method for checking if a user is logged in or not
+ //the 1 line if statement is called the itenerary operator
+ //you need to specify which middle ware we want our app to pass through in the middle ware controller
+ //to protect certain pages in auth, we use the middleware construct and put it in our controller as displayed
+ //not found http exception in route collection line 161 is when laravel can't find a route.
+ //more functions on like how to get user info of logged in user or user functions check video part 28 and time: 34:00
+ //url generator is a route issue because it cant generate the url,so you edit your route and use uses as displayed
  ?>

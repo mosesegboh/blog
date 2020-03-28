@@ -11,6 +11,11 @@ use Session;
 
 class PostController extends Controller
 {
+    //to lock down our post controller functions
+    public function  __construct(){
+        //the auth middleware uses only authenticated users then if there are other methods you want to exclude, you will use the except array and call the function
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource -- which is a post.
      *

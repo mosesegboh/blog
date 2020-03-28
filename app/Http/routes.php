@@ -16,13 +16,21 @@
 //this particular version does not have a routes middleware but hte tutorial does
 
 //authentication routes
-Route::get('auth/login', 'Auth\AuthController@getLogin' );
+//as is what is used to name your route,the eidt we did below basically names our route for use and you can also view it in the route list
+Route::get('auth/login', ['as' => 'login','uses' => 'Auth\AuthController@getLogin'] );
 Route::post('auth/login', 'Auth\AuthController@postLogin' );
-Route::get('auth/logout', 'Auth\AuthController@getLogout' );
+Route::get('auth/logout', ['as' => 'logout','uses' => 'Auth\AuthController@getLogout'] );
 
 //registration routes
 Route::get('auth/register', 'Auth\AuthController@getRegister' );
 Route::post('auth/register', 'Auth\AuthController@postRegister' );
+
+//passwords reset routes
+//the question mark below means that the token might not really exist
+ //the controller method in this route is located in the address as shown below, but you need to access laravel/vendor folders to get to it
+Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+Route::post('password/email', 'Auth\AuthController@sendResetLinkEmail');
+Route::get('password/reset/', 'Auth\PasswordController@reset');
 
 
 Route::get('contact','PagesController@getContact');
@@ -32,6 +40,7 @@ Route::get('blog', ['uses' => 'BlogController@getIndex'], ['as' => 'blog.index']
 Route::get('about', 'PagesController@getAbout' );
 
 Route::get('/', 'PagesController@getIndex');
+Route::get('/home', 'PagesController@getIndex');
 
 //we use the  resource below to merge all our routes in one line and we use namespacing aswell for our posts
 Route::resource('posts','PostController');
