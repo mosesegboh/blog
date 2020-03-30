@@ -25,12 +25,18 @@ Route::get('auth/logout', ['as' => 'logout','uses' => 'Auth\AuthController@getLo
 Route::get('auth/register', 'Auth\AuthController@getRegister' );
 Route::post('auth/register', 'Auth\AuthController@postRegister' );
 
+
 //passwords reset routes
 //the question mark below means that the token might not really exist
+// Password reset link request routes...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
  //the controller method in this route is located in the address as shown below, but you need to access laravel/vendor folders to get to it
-Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-Route::post('password/email', 'Auth\AuthController@sendResetLinkEmail');
-Route::get('password/reset/', 'Auth\PasswordController@reset');
+
 
 
 Route::get('contact','PagesController@getContact');

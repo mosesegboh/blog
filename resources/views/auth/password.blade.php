@@ -9,10 +9,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Reset Password</div>
                 <div class="panel-body">
+                    @if(session('status'))
+                        <div class="alert alert-success">
+                            {{session('status')}}
+                        </div>
+                    @endif
                     {{-- the below line is like posting the form to the corresponding controller --}}
                     {!! Form::open(['url' => 'password/email', 'method' => 'post']) !!}
                         {!! Form::label('email', 'Email:') !!}
                         {!!Form::email('email', null, ['class' => 'form-control'])!!}
+                        <br>
                         {!!Form::submit('Reset Password', ['class' => 'btn btn-primary btn-block'])!!}
                     {!! Form::close() !!}
                 </div>

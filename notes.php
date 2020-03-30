@@ -48,4 +48,63 @@
  //not found http exception in route collection line 161 is when laravel can't find a route.
  //more functions on like how to get user info of logged in user or user functions check video part 28 and time: 34:00
  //url generator is a route issue because it cant generate the url,so you edit your route and use uses as displayed
+ //PDOException in Connector.php line 55:
+//SQLSTATE[HY000] [2054] The server requested authentication method unknown to the client
+ //the above is a server error,try restarting your local database server
+ //always reference your route list for route issues
+
+
+   /**
+      *======================
+      *I added this manually
+      *======================
+     * Display the password reset view for the given token.
+     * 
+     * If no token is present,display the link request form
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @param  string|null  $token
+     * @return \Illuminate\Http\Response
+     */
+    // public function showResetForm(Request $request, $token = null)
+    // {
+    //     if (is_null($token)) {
+    //         return $this->getEmail();
+    //     }
+
+    //     $email = $request->input('email');
+
+    //     if (property_exists($this, 'resetView')){
+    //         return view($this->resetView)->with(compact('token', 'email'));
+    //     }
+
+    //     if (view()->exists('auth.passwords.reset')){
+    //         return view('auth.passwords.reset')->with(compact('token','email'));
+    //     }
+
+    //     return view('auth.reset')->with(compact('token', 'email'));
+    // }
+
+
+    //authentication routes
+//as is what is used to name your route,the eidt we did below basically names our route for use and you can also view it in the route list
+// Route::get('auth/login', ['as' => 'login','uses' => 'Auth\AuthController@getLogin'] );
+// Route::post('auth/login', 'Auth\AuthController@postLogin' );
+// Route::get('auth/logout', ['as' => 'logout','uses' => 'Auth\AuthController@getLogout'] );
+
+// //registration routes
+// Route::get('auth/register', 'Auth\AuthController@getRegister' );
+// Route::post('auth/register', 'Auth\AuthController@postRegister' );
+
+
+// //passwords reset routes
+// //the question mark below means that the token might not really exist
+//  //the controller method in this route is located in the address as shown below, but you need to access laravel/vendor folders to get to it
+// Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+// Route::post('password/email', 'Auth\AuthController@sendResetLinkEmail');
+// Route::post('password/reset/', 'Auth\PasswordController@reset');
+
+//the url takes you to the particular url but routes takes you to whats definde in the routes
+ //any changes made to the environment file, you will need to reset the server
+ //in routes, the reset/token routes will not work unless you setup the whole process and test it because it is already prebuilt with laravel read documentation
  ?>

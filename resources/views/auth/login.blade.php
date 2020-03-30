@@ -15,7 +15,10 @@
                 {!! Form::checkbox('remember') !!}{!!Form::label('remember', 'Remember Me:')!!}
             
                 {!!Form::submit('Login', ['class' => 'btn btn-primary btn-block'])!!}
-            {!! Form::close() !!}
+            {{-- the url takes you to the particular url but routes takes you to whats definde in the routes --}}
+        <p><a href="{{url('password/email')}}">Forgot My Password</a></p>
+
+                {!! Form::close() !!}
         </div>
     </div>
 
