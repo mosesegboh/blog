@@ -1,4 +1,4 @@
-<?php 
+
 //the slash in routes is basically your base url
 //always label your routes from the top
 //we should not have a function in our routes file
@@ -107,4 +107,7 @@
 //the url takes you to the particular url but routes takes you to whats definde in the routes
  //any changes made to the environment file, you will need to reset the server
  //in routes, the reset/token routes will not work unless you setup the whole process and test it because it is already prebuilt with laravel read documentation
- ?>
+-Error laravel error Class App\Http\Controllers\CategoryController does not exist can be resolved by checking your controller namespacing/names/routes, and if all is okay? and running the command below.
+ -the error below- composer dump-autoload -o
+ -Also error- App\blah blah not found.if you are using the resource routes for anything besides the posts,you need to add the namespace above your code or if you use Category all function or namespace in your code, you need to need to tell laravel to use the namespace
+ 

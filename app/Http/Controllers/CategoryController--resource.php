@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+//because we are using resources,we have to namespace it
+use App\Category;
+use Session;
+
 
 class CategoryController extends Controller
 {
@@ -48,6 +52,18 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //this will save a new category and redirect to the index page
+        $this->validate($request, array(
+            'name' => 'required|max:255'
+        ));
+        $category = new Category;
+        $category->name = $request->name;
+        $category->save();
+
+        // Flash message - namespace sessions aswell
+        Session::flash('success', 'New Category has been created');
+
+        //redirect
+        return redirect()->route('categories.index');
     }
 
     /**
