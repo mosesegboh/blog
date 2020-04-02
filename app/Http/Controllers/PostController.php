@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Category;
 use Session;
 
 class PostController extends Controller
@@ -39,7 +40,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create')->withCategories($categories);
     }
 
     /**
@@ -54,6 +56,7 @@ class PostController extends Controller
         $this->validate($request, array(
                 'title' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'category_id' => 'required|integer',
                 'body'  => 'required'
             ));
 
@@ -62,6 +65,7 @@ class PostController extends Controller
         $post=new Post;
         $post->title = $request->title;
         $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
         $post->body = $request ->body;
 
         $post->save();
@@ -97,9 +101,15 @@ class PostController extends Controller
     {
         //find the post in the dataebase and save it as a variable
         $post = Post::find($id);
-
+        $categories = Category::all();
+        $cats = array();
+        //we brought the looping of the catgory in the the controller becasue it is a good prcatice
+        foreach ($categories as $category){
+            //the below will create a key value pair that will create the id and name key value pair
+            $cats($category->id) = $category->name;
+        }
         //return the view and pass the var we previously created
-        return view('posts.edit')->withPost($post);
+        return view('posts.edit')->withPost($post)->withCategories($cats);
     }
 
     /**
