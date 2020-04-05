@@ -110,4 +110,6 @@
 -Error laravel error Class App\Http\Controllers\CategoryController does not exist can be resolved by checking your controller namespacing/names/routes, and if all is okay? and running the command below.
  -the error below- composer dump-autoload -o
  -Also error- App\blah blah not found.if you are using the resource routes for anything besides the posts,you need to add the namespace above your code or if you use Category all function or namespace in your code, you need to need to tell laravel to use the namespace
- 
+ -the models just helps you work ot talk with the database while migration is what actually genetates the database.
+ -if you already have a database,you really do not need migrations in that case but if you are adding you might need to run a migration to add to the database.
+ -

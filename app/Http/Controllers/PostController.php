@@ -102,12 +102,12 @@ class PostController extends Controller
         //find the post in the dataebase and save it as a variable
         $post = Post::find($id);
         $categories = Category::all();
-        $cats = array();
         //we brought the looping of the catgory in the the controller becasue it is a good prcatice
-        foreach ($categories as $category){
-            //the below will create a key value pair that will create the id and name key value pair
-            $cats($category->id) = $category->name;
-        }
+        $cats = [];
+        foreach($categories as $category)
+{
+        $cats[$category->id] = $category->name;
+}
         //return the view and pass the var we previously created
         return view('posts.edit')->withPost($post)->withCategories($cats);
     }
@@ -129,12 +129,14 @@ class PostController extends Controller
         if ($request->input('slug') == $post->slug ) {
             $this->validate($request, array(
                 'title' => 'required|max:255',
+                'category_id' => 'required|integer',
                 'body'  => 'required'
            ));
         }else{
             $this->validate($request, array(
                 'title' => 'required|max:255',
                 'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'category_id' => 'required|integer',
                 'body'  => 'required'
             ));
         }
@@ -145,6 +147,7 @@ class PostController extends Controller
         //input will grab parameters from either the post or get request and it will get whatever it being referenced as
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
+        $post->category_id =$request->input('category_id');
         $post->body = $request->input('body');
 
         $post->save();
