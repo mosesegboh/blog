@@ -41,6 +41,10 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 //the second parameter is where you can list out all the resources you dont need in routelist,you can use except and only in the array.words taken literally
 Route::resource('categories','CategoryController',['except' => ['create']]);
 
+//Tags
+//the second parameter is where you can list out all the resources you dont need in routelist,you can use except and only in the array.words taken literally
+Route::resource('tags','TagController',['except' => ['create']]);
+
 Route::get('contact','PagesController@getContact');
 //the where at the end of the below routes means that no regular expressions shouldnbe allowed in the slugs so it should not accept anything outseide those characters 
 Route::get('blog/{slug}', ['as' => 'blog.single','uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');

@@ -28,6 +28,7 @@
                       {{-- you can use the route list here not normal urls,it will  automatically generate a url for that route --}}
                       <li><a href="{{ route('posts.index') }}">Posts</a></li>
                       <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                      <li><a href="{{ route('tags.index') }}">Tags</a></li>
                       <li role="separator" class="divider"></li>
                     <li><a href="{{ route('logout') }}">Log out</a></li>
                     </ul>

@@ -25,6 +25,14 @@
 						@endforeach
 					</select>
 
+					{!!  Form::label('tag_id', "Tags :", ["class"=>'form-spacing-top'])   !!}
+					{{-- the array in the tag below is basically for storing the several items selected from the tag input feild --}}
+					<select class="select2-multi form-control" name="tags[]" multiple="multiple">
+						@foreach ($tags as $tag )
+					<option value="{{$tag->id}}">{{$tag->name}}</option>
+						@endforeach
+					</select>
+
 					{!!  Form::label('body', "Post Body:")   !!}
 					{!!   Form::textarea('body', null, array('class'=>'form-control', 'required'=>'')) !!}
 
@@ -35,8 +43,8 @@
 	</div>
 	@section('scripts')
 	{!! Html::style('js/parsley.min.js')  !!}
+	<script>
+		$('.select2-multi').select2();
+	</script>
 	@endsection
-
-	
-
 @endsection
