@@ -167,6 +167,16 @@ class PostController extends Controller
 
         $post->save();
 
+        //we will sync our post/tag  association here aswell as we did before when we were saving it,the second parameter will be true here because we want to overide them the default is true
+        //inorder to prevent an error we need to check if the request isset first
+        if (isset($request->tags)) {
+            $post->tags()->sync($request->tags);
+        }else{
+            //pass in an empty array with no associations to prevent the error
+            $post->tags()->sync(array());
+        }
+        
+
 
         //set flash data with success message
         Session::flash('success', 'This post was successfully saved' );
@@ -185,6 +195,8 @@ class PostController extends Controller
     {
         //find the item
         $post = Post::find($id);
+        //this is for detaching the tags and relationships the post is linked to
+        $post->tags()->detach();
         //call the delete function in out eloquent model
         $post->delete();
         //redirect

@@ -67,4 +67,9 @@
  -if you get Method not allowed error, check if you are putting the write method for your forms
  -javascript array does not really talk to php very well so inorder to pass an array from javasript to php, we need to convert from php array to javascript array using  json object first then pass to php
  -ERROR undefined property: illuminate\database\eloquent\collection::$ ..check you eloquent query and in contollers which connects to the database,something is wrong.
+ -having migration issue like nothing to migrate, delete the migration file, composer autoload dump and try again. or php migrate:refresh
+ -Error badmethodcallexception in builder.php 216, call to undefined method illuminnate/databse/query/builder::associate()....the problem is that you should choose the particular associate you want,eg do something like '$comment->post()->associate($post);'
+ -Error illegal offset type...Illegal offest type isset or empty....to find out an error you can comment things out line by line till you get the particular line that works.in this case we wrapped the redirect route in the whole array eg return redirect()->route('blog.single', [$post->id]); and use post id  or slug.
+ -SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'post_id' cannot be null (SQL: insert into `comments` (`name`, `email`, `comment`, `approved`, `post_id`, `updated_at`, `created_at`) values----this can be cause by so many things first its an sql error read well it could be from your form action, or routes or there about
+ - Class 'App/Comment' not found (View: C:\wamp64\www\laravel\blog\resources\views\blog\single.blade.php)-this can be casued as a result of wrong parameters put into your foreach loop.
  

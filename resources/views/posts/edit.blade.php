@@ -60,7 +60,7 @@
 	 <script>
 		 //the get relatedtags function below is  laravel helper that gets the id of posts instead of the whole post in an array basically
 		 //we use json encode below to convert from a javascript array to a php array.
-		//  $('.select2.multi').select2();
+		 $('.select2.multi').select2();
 		 $('.select2-multi').select2().val({!! json_encode($post->tags()->getRelatedIds()) !!}).trigger('change');
 	</script>	
 	
