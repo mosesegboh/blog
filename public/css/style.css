@@ -5,4 +5,30 @@
 
 .form-spacing-top{
 	margin-top: 30px;
+} 
+
+.comment{
+	margin-bottom: 45px;
+
+}
+
+.author-image{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	float: left;
+}
+
+.author-name{
+	float: left;
+	margin: 5px;
+	margin-left: 15px;
+}
+
+.author-name>h4{
+	margin: 5px 0px;
+}
+
+.comment-content{
+	clear: both;
 }

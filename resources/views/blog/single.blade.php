@@ -8,6 +8,8 @@
         <div class="col-md-8 col-md-offset-2">
             <h1>{{ $post->title }}</h1>
             <p>{{ $post->body }}</p>
+            <hr>
+        <p>Posted In:{{$post->category->name}}</p>
         </div>
     </div>
 
@@ -16,11 +18,18 @@
             {{-- loop through the comments --}}
             @foreach ($post->comments as $comment)
                 <div class="comment">
-                    <p><strong>Name:</strong>{{$comment->name}}</p>
-                    <p><strong>Comment:</strong><br/> {{$comment->comment}}</p><br>
+                    <div class="author-info">
+                        <img src="" class="author-image">
+                        <div class="author-name">
+                            <h4>{{$comment->name}}</h4>
+                            <p class="author-time">{{$comment->created_at}}</p>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        {{$comment->comment}}
+                    </div>
                 </div>
             @endforeach
-
         </div>
     </div>
 
@@ -45,11 +54,7 @@
                     {!! Form::submit('Add Comment', array('class'=>'btn btn-success btn-lg btn-block', 'style' => 'margin-top:20px;' )) !!}
                 </div>
             </div>
-            
-            
-
         {!! Form::close() !!}
         </div>
     </div>
-
 @endsection
