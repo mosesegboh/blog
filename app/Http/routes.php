@@ -42,8 +42,11 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::resource('categories','CategoryController',['except' => ['create']]);
 
 //comments route, you can do manually like we did below or you canjust use the resource like we did above
-Route::post('comments/{post_id}', ['uses' =>'CommentsController@store', 'as' =>
-'comments.store']);
+Route::post('comments/{post_id}', ['uses' =>'CommentsController@store', 'as' =>'comments.store']);
+Route::get('comments/{id}/edit',['uses' => 'CommentsController@edit', 'as' => 'comments.edit']);
+Route::put('comments/{id}/edit',['uses' => 'CommentsController@update', 'as' => 'comments.update']);
+Route::delete('comments/{id}/edit',['uses' => 'CommentsController@destroy', 'as' => 'comments.edit']);
+Route::get('comment/')
 
 //Tags
 //the second parameter is where you can list out all the resources you dont need in routelist,you can use except and only in the array.words taken literally
