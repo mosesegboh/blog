@@ -24,8 +24,8 @@
 //FatalThrowableError in PagesController.php line 11:
 //Class 'App\Http\Controllers\Post' not foundthis error is caused because 
 //the above error is caused because we used the name spacing,we are using post in another controller which does not belong there,
-//so to solve this issue, we need to use/import above App/Post o whatever applies in the situation
- //in the env. developmemt is developing locally and production is on the live server.so change that when deploying
+ -so to solve this issue, we need to use/import above App/Post o whatever applies in the situation
+ -in the env. developmemt is developing locally and production is on the live server.so change that when deploying
  //ERROR-ErrorException in 7177567e2e21e6fbe09b9c5081ac820b line 8:
 //Trying to get property of non-object (View: C:\wamp64\www\laravel\blog\resources\views\posts\show.blade.php)
  //the above error means you are tyring to access somthing in the database that does not exist say id or something else
@@ -72,4 +72,9 @@
  -Error illegal offset type...Illegal offest type isset or empty....to find out an error you can comment things out line by line till you get the particular line that works.in this case we wrapped the redirect route in the whole array eg return redirect()->route('blog.single', [$post->id]); and use post id  or slug.
  -SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'post_id' cannot be null (SQL: insert into `comments` (`name`, `email`, `comment`, `approved`, `post_id`, `updated_at`, `created_at`) values----this can be cause by so many things first its an sql error read well it could be from your form action, or routes or there about
  - Class 'App/Comment' not found (View: C:\wamp64\www\laravel\blog\resources\views\blog\single.blade.php)-this can be casued as a result of wrong parameters put into your foreach loop.
+ -parse error could possibly be semi colon not formatted properly, or array not formatted properly.
+ -missing required parameters meand a paameter ot variable is missing in the referenced unit
+ -token mismatch ha to do with forms.
+ -you can paste code and run composer update for your packages as well as the new recent way of installation
+ -sometimes class not found can be solved by config:clear.
  

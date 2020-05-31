@@ -4,6 +4,13 @@
 
 @section('stylesheets')
 	{!! Html::style('css/parsley.css')  !!}
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>tinymce.init({
+		selector: 'textarea', 
+		plugins: 'link code',
+		menubar: false,
+		
+	  });</script>
 @endsection
 
 @section('content')
@@ -11,7 +18,7 @@
 		<div class="col-md-8 col-md-offset-2"> <!-- the offset 2 will create 2 columns on the left and rigth side -->
 			<h1>Create New Post</h1>
 			<hr> 
-				{!! Form::open(array('route' => 'posts.store', 'data-parsley-validate'=>'')) !!}
+				{!! Form::open(array('route' => 'posts.store', 'data-parsley-validate'=>'', 'files'=>true)) !!}
 				    {!! Form::label('title', 'Title:') !!} 
 				    {!! Form::text('title', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255')) !!}
 					
@@ -25,6 +32,9 @@
 						@endforeach
 					</select>
 
+					{!! Form::label('featured_image','Upload Image:',  ["class"=>'form-spacing-top']) !!}
+					{!! Form::file('featured_image') !!}
+
 					{!!  Form::label('tag_id', "Tags :", ["class"=>'form-spacing-top'])   !!}
 					{{-- the array in the tag below is basically for storing the several items selected from the tag input feild --}}
 					<select class="select2-multi form-control" name="tags[]" multiple="multiple">
@@ -34,7 +44,7 @@
 					</select>
 
 					{!!  Form::label('body', "Post Body:")   !!}
-					{!!   Form::textarea('body', null, array('class'=>'form-control', 'required'=>'')) !!}
+					{!!   Form::textarea('body', null, array('class'=>'form-control form-spacing-top')) !!}
 
 					{!! Form::submit('Create Post', array('class'=>'btn btn-success btn-lg btn-block', 'style' => 'margin-top:20px;' )) !!}
 

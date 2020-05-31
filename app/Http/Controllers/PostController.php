@@ -11,6 +11,9 @@ use App\Post;
 use App\Tag;
 use App\Category;
 use Session;
+use Purifier;
+use Image;
+use Storage;
 
 class PostController extends Controller
 {
@@ -62,7 +65,9 @@ class PostController extends Controller
                 'title' => 'required|max:255',
                 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
                 'category_id' => 'required|integer',
-                'body'  => 'required'
+                'body'  => 'required',
+                //sometimes basically means validate if something is in it
+                'featured_image' => 'sometimes|image'
             ));
 
         //store in the database
@@ -71,7 +76,21 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
-        $post->body = $request ->body;
+        $post->body = Purifier::clean($request ->body);
+
+        //save our image since the feild is optional we use an if statement
+        //also the functions below are running with the image intervention library..it does not run with laravel ...read documentation for laravel method
+        if($request->hasFile('featured_image')){
+            $image= $request->file('featured_image');
+            $filename= time() . '.' . $image->getClientOriginalExtension();
+            //if you are storing in the storage path use the storage location as well below
+            $location = public_path('images/' . $filename);
+            //use image intervention to resize
+            Image::make($image)->resize(800,400)->save($location);
+
+            $post->image= $filename;
+
+        }
 
         $post->save();
         //we want to associate post to our tag to laravel below
@@ -138,23 +157,16 @@ class PostController extends Controller
     {
         //validate the data
         //the request parameter below contains all the data we need fron the database
-        //we used an if statement below to validate if the slug has being changed before because it causes a bug
+        //we used an if statement below to validate if the slug has being changed before because it causes a bug but we later removed it
         $post = Post::find($id);
-
-        if ($request->input('slug') == $post->slug ) {
+            //we removed the if statement for uniqueness below and added $id for the unique slug
             $this->validate($request, array(
                 'title' => 'required|max:255',
+                'slug'  => "required|alpha_dash|min:5|max:255|unique:posts,slug,$id",
                 'category_id' => 'required|integer',
-                'body'  => 'required'
-           ));
-        }else{
-            $this->validate($request, array(
-                'title' => 'required|max:255',
-                'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'category_id' => 'required|integer',
-                'body'  => 'required'
+                'body'  => 'required',
+                'featured_image' => 'image'
             ));
-        }
 
         //save the data to the database
         //find the post you want to edit first
@@ -164,6 +176,23 @@ class PostController extends Controller
         $post->slug = $request->input('slug');
         $post->category_id =$request->input('category_id');
         $post->body = $request->input('body');
+
+        //below to check if someone added a photo,if not it will ignore it
+        if ($request->hasFile('featured_image')) {
+            //add new photo
+            $image= $request->file('featured_image');
+            $filename= time() . '.' . $image->getClientOriginalExtension();
+            //if you are storing in the storage path use the storage location as well below
+            $location = public_path('images/' . $filename);
+            //use image intervention to resize
+            Image::make($image)->resize(800,400)->save($location);
+            $oldFilename = $post->image;
+            //update database
+            $post->image= $filename;
+            //delete old photo
+            //make sure you change where the storage faces ssaves the file in the conig/filesystem to correspond with whatever you are using to save
+            Storage::delete($oldFilename);
+        }
 
         $post->save();
 
@@ -197,6 +226,7 @@ class PostController extends Controller
         $post = Post::find($id);
         //this is for detaching the tags and relationships the post is linked to
         $post->tags()->detach();
+        Storage::delete($post->image);
         //call the delete function in out eloquent model
         $post->delete();
         //redirect
