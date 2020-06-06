@@ -77,4 +77,5 @@
  -token mismatch ha to do with forms.
  -you can paste code and run composer update for your packages as well as the new recent way of installation
  -sometimes class not found can be solved by config:clear.
+ -whenver you are using request in the controller you need to pass it ias a parameter Request, request
  
